@@ -1,12 +1,26 @@
 YASM = yasm
 CC   = clang
+LD   = gld
 
-CFLAGS = -Wall -Wextra -Werror -nostdlib -fno-builtin
+CFLAGS = -march=i686 -ccc-host-triple i686-elf \
+	 -integrated-as \
+	 -nostdlib -fno-builtin -ffreestanding \
+	 -Wall -Wextra -Werror
 
-all: main.c.o boot.S.o
+OBJECTS = main.c.o boot.S.o
+
+all: kernel.bin
+
+kernel.bin: $(OBJECTS)
+	$(LD) -T cernel.ld -o $@ $^
+
+.PHONY: clean
 
 %.c.o: %.c
 	$(CC) -c -o $@ $^ $(CFLAGS)
 
 %.S.o: %.S
 	$(YASM) -f elf -o $@ $^
+
+clean:
+	@rm -f kernel.bin $(OBJECTS)
