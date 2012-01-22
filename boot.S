@@ -1,5 +1,5 @@
 global loader
-extern main
+extern kmain
 
 ;; Multiboot header
 MULTIBOOT_PAGE_ALIGN  	equ 1 << 0
@@ -23,7 +23,7 @@ loader:
 	push eax
 	;; Load multiboot info structure
 	push ebx
-	call main
+	call kmain
 
 	cli
 .hang:
@@ -31,5 +31,6 @@ loader:
 	jmp .hang
 
 section .bss
+align 4
 stack:
 	resb KERNEL_STACK_SIZE
