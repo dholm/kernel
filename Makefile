@@ -1,6 +1,6 @@
 YASM = yasm
 CC   = clang
-LD   = gld
+LD   = i686-elf-ld
 
 CFLAGS = -march=i686 -ccc-host-triple i686-elf \
 	 -integrated-as \
