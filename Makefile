@@ -7,7 +7,7 @@ CFLAGS = -march=i686 -ccc-host-triple i686-elf \
 	 -nostdlib -fno-builtin -ffreestanding \
 	 -Wall -Wextra -Werror
 
-OBJECTS = main.c.o boot.S.o
+OBJECTS = serial.c.o io.c.o main.c.o boot.S.o
 
 all: kernel.bin
 
