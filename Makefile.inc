@@ -1,3 +1,4 @@
+MAKE = make
 YASM = yasm
 CC   = clang
 LD   = i686-elf-ld

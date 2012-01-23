@@ -7,10 +7,14 @@ OBJECTS = serial.c.o io.c.o \
 
 all: kernel.bin
 
-kernel.bin: $(OBJECTS)
+libc/libc.a:
+	$(MAKE) -C libc
+
+kernel.bin: libc/libc.a $(OBJECTS)
 	$(LD) -T cernel.ld -o $@ $^
 
 .PHONY: clean
 
 clean:
+	@make -C libc clean
 	@rm -f kernel.bin $(OBJECTS)
