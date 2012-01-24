@@ -1,5 +1,5 @@
+#include <serial.h>
 #include "multiboot.h"
-#include "serial.h"
 
 static void welcome_message(void)
 {

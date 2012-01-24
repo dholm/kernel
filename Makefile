@@ -1,20 +1,26 @@
 include Makefile.inc
 
-CFLAGS += -Ilibc
-
-OBJECTS = serial.c.o io.c.o \
-	  main.c.o boot.S.o
+SUBDIRS = init libc io
 
 all: kernel.bin
 
-libc/libc.a:
-	$(MAKE) -C libc
+kernel.bin: libinit.a libio.a libc.a
+	$(LD) -T kernel.ld -o $@ $^
 
-kernel.bin: libc/libc.a $(OBJECTS)
-	$(LD) -T cernel.ld -o $@ $^
+libinit.a: force_look
+	$(MAKE) -C init
+
+libio.a: force_look
+	$(MAKE) -C io
+
+libc.a: force_look
+	$(MAKE) -C libc
 
 .PHONY: clean
 
 clean:
-	@make -C libc clean
+	@for dir in $(SUBDIRS); do (make -C $$dir clean); done
 	@rm -f kernel.bin $(OBJECTS)
+
+force_look:
+	@true
