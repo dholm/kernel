@@ -12,7 +12,7 @@ void serial_init(void)
      io_write8(IoPort_Com1ModemControl,    0x0b);
 }
 
-static int serial_data_buffered(void)
+int serial_data_buffered(void)
 {
      return io_read8(IoPort_Com1LineStatus) & 1;
 }
@@ -34,10 +34,10 @@ void serial_write8(unsigned char c)
      io_write8(IoPort_Com1Data, c);
 }
 
-void serial_write_buffer(const unsigned char* buffer, unsigned long size)
+void serial_write_buffer(const char* buffer, unsigned long size)
 {
      for (unsigned long i = 0; i < size; ++i)
      {
-	  serial_write8(buffer[i]);
+          serial_write8(buffer[i]);
      }
 }
