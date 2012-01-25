@@ -1,6 +1,8 @@
 include ../Makefile.inc
 
-OBJECTS = string.c.o vsprintf.c.o
+CFLAGS += -I../io
+
+OBJECTS = stdio.c.o string.c.o vsprintf.c.o
 
 all: ../libc.a
 
