@@ -1,6 +1,6 @@
 include ../Makefile.inc
 
-CFLAGS += -I../io
+CFLAGS += -I../io -I../libc -I../libkern -I../
 
 OBJECTS = boot.S.o main.c.o
 

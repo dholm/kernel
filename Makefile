@@ -4,8 +4,11 @@ SUBDIRS = init libc io
 
 all: kernel.bin
 
-kernel.bin: libinit.a libio.a libc.a
+kernel.bin: libinit.a libkern.a libio.a libc.a
 	$(LD) -T kernel.ld -o $@ $^
+
+libkern.a: force_look
+	$(MAKE) -C libkern
 
 libinit.a: force_look
 	$(MAKE) -C init
